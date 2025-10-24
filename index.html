@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inicio - Agua Pluvial Zinacantepec</title>
+  <meta name="description" content="Proyectos y calculadora de captación de agua pluvial en Zinacantepec.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <img src="gota.jpg" alt="logo" class="brand-logo">
+      <h1 class="brand-title">Agua Pluvial Zinacantepec</h1>
+    </div>
+
+    <nav class="nav" id="main-nav">
+      <a href="index.html" class="nav-link active">Inicio</a>
+      <a href="problema.html" class="nav-link">El Problema</a>
+      <a href="soluciones.html" class="nav-link">Soluciones</a>
+      <a href="calculadora.html" class="nav-link">Calculadora</a>
+      <a href="galeria.html" class="nav-link">Galería</a>
+      <a href="contacto.html" class="nav-link">Contacto</a>
+      <a href="mapa.html" class="nav-link">Ver mapa</a>
+    </nav>
+
+    <button class="hamburger" aria-label="Abrir menú" id="hamburger" aria-expanded="false">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero fade-up visible">
+      <div class="hero-inner">
+        <h2>¡Cuidemos el agua en Zinacantepec!</h2>
+        <p>Más del 50% de la población enfrenta escasez de agua en la temporada seca. La captación de agua pluvial garantiza abastecimiento para hogares, escuelas y comercios.</p>
+        <a class="btn-primary" href="galeria.html">Ver proyectos exitosos</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Agua Pluvial Zinacantepec — Contacto: contacto@aguapluvialzinacantepec.mx</p>
+  </footer>
+
+  <div id="app-modal" class="modal" aria-hidden="true"></div>
+  <div id="app-toast" class="toast" aria-live="polite"></div>
+  <div id="app-loader" class="loader" aria-hidden="true"><div class="spinner"></div></div>
+
+  <script src="java.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Precipitación - Agua Pluvial Zinacantepec</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <link rel="stylesheet" href="styles.css"/>
+
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+      border-radius: 12px;
+      margin: 20px 0;
+      transition: transform 0.3s ease;
+    }
+    #map:hover {
+      transform: scale(1.02);
+    }
+
+    .info-card {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 320px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      padding: 20px;
+      display: none;
+      z-index: 1000;
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+    .info-card.show {
+      display: block;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .info-card h3 {
+      margin-top: 0;
+      color: #0077b6;
+      animation: slideInTitle 0.5s ease forwards;
+    }
+    @keyframes slideInTitle {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .close-btn {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .close-btn:hover {
+      background: #023e8a;
+      transform: scale(1.05);
+    }
+
+    header {
+      background: linear-gradient(90deg,#1e88e5,#43a047);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: headerSlide 1s ease forwards;
+    }
+    @keyframes headerSlide {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .hamburger.open {
+      transform: rotate(90deg);
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav ul li a.active {
+      text-decoration: underline;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: #fff;
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #0077b6;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 10px;
+      }
+      nav ul.active { display: flex; }
+    }
+
+    .marker-label {
+      background-color: #0077b6;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Agua Pluvial Zinacantepec</h1>
+    <div class="hamburger" id="hamburger">
+      <div></div><div></div><div></div>
+    </div>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="problema.html">Problema</a></li>
+        <li><a href="soluciones.html">Soluciones</a></li>
+        <li><a href="calculadora.html">Calculadora</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="mapa.html" class="active">Mapa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h2 style="text-align:center; margin-top:20px;">Mapa de Precipitación en Zinacantepec</h2>
+    <div id="map"></div>
+  </section>
+
+  <div class="info-card" id="infoCard">
+    <h3 id="infoTitle"></h3>
+    <p id="infoContent"></p>
+    <button class="close-btn" id="closeBtn">Cerrar</button>
+  </div>
+<footer>
+    <p>© 2025 Agua Pluvial Zinacantepec — Contacto: contacto@aguapluvialzinacantepec.mx</p>
+  </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        hamburger.classList.toggle("open");
+      });
+
+      const map = L.map("map").setView([19.285, -99.732], 13);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution: "© OpenStreetMap contributors"
+      }).addTo(map);
+
+      const iconGota = L.icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/2933/2933792.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30]
+      });
+
+      const puntos = [
+        {
+          nombre: "Zona Centro",
+          coords: [19.285, -99.732],
+          info: `
+            Precipitación anual: <b>900 mm</b><br>
+            Población aproximada: 15,000 habitantes<br>
+            Tipo de zona: Urbana<br>
+            Nota: Ideal para captación doméstica y pequeños sistemas de riego.
+          `
+        },
+        {
+          nombre: "San Luis Mextepec",
+          coords: [19.291, -99.716],
+          info: `
+            Precipitación anual: <b>1000 mm</b><br>
+            Población aproximada: 8,500 habitantes<br>
+            Tipo de zona: Semiurbana<br>
+            Nota: Alta potencial de captación, ideal para proyectos comunitarios.
+          `
+        },
+        {
+          nombre: "San Cristóbal Tecolit",
+          coords: [19.276, -99.744],
+          info: `
+            Precipitación anual: <b>850 mm</b><br>
+            Población aproximada: 5,200 habitantes<br>
+            Tipo de zona: Rural<br>
+            Nota: Captación moderada, adecuada para uso agrícola.
+          `
+        }
+      ];
+
+      const infoCard = document.getElementById("infoCard");
+      const infoTitle = document.getElementById("infoTitle");
+      const infoContent = document.getElementById("infoContent");
+      const closeBtn = document.getElementById("closeBtn");
+
+      puntos.forEach(punto => {
+        const marker = L.marker(punto.coords, { icon: iconGota }).addTo(map);
+
+        const label = L.divIcon({
+          className: "marker-label",
+          html: punto.nombre,
+          iconAnchor: [15, -10]
+        });
+        L.marker(punto.coords, { icon: label, interactive: false }).addTo(map);
+
+        marker.on("click", () => {
+          infoTitle.innerHTML = punto.nombre;
+          infoContent.innerHTML = punto.info;
+          infoCard.classList.add("show");
+        });
+      });
+
+      closeBtn.addEventListener("click", () => infoCard.classList.remove("show"));
+    });
+  </script>
+</body>
+</html>

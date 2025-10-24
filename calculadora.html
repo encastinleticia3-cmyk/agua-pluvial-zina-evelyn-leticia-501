@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Calculadora - Agua Pluvial Zinacantepec</title>
+  <meta name="description" content="Calculadora de captación de agua pluvial, ahorro y retorno de inversión.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <img src="gota.jpg" alt="logo" class="brand-logo">
+      <h1 class="brand-title">Agua Pluvial Zinacantepec</h1>
+    </div>
+
+    <nav class="nav" id="main-nav">
+      <a href="index.html" class="nav-link">Inicio</a>
+      <a href="problema.html" class="nav-link">El Problema</a>
+      <a href="soluciones.html" class="nav-link">Soluciones</a>
+      <a href="calculadora.html" class="nav-link active">Calculadora</a>
+      <a href="galeria.html" class="nav-link">Galería</a>
+      <a href="contacto.html" class="nav-link">Contacto</a>
+      <a href="mapa.html" class="nav-link">Ver mapa</a>
+    </nav>
+
+    <button class="hamburger" aria-label="Abrir menú" id="hamburger" aria-expanded="false">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="section">
+      <h3>Calculadora de Captación de Agua</h3>
+      <p class="center">Calcula cuánta agua podrías captar al año y el retorno aproximado.</p>
+
+      <form id="calc-form" class="form" aria-live="polite">
+        <label>Área del techo (m²)</label>
+        <input id="area" class="input" type="number" placeholder="Ej: 50" min="0" required>
+
+        <label>Precipitación anual promedio (mm)</label>
+        <input id="precipitacion" class="input" type="number" placeholder="Ej: 800" min="0" required>
+
+        <label>Coeficiente de escorrentía</label>
+        <select id="coeficiente" class="input">
+          <option value="0.9">Techo metálico (0.9)</option>
+          <option value="0.8">Teja (0.8)</option>
+          <option value="0.7">Concreto (0.7)</option>
+        </select>
+
+        <label>Precio agua (MXN por m³)</label>
+        <input id="precio" class="input" type="number" step="0.01" value="25" min="0">
+
+        <label>Costo estimado del sistema (MXN)</label>
+        <input id="costoSistema" class="input" type="number" step="1" value="8000" min="0">
+
+        <div class="form-buttons">
+          <button id="btnCalcular" type="button" class="btn-primary">Calcular</button>
+          <button id="btnGuardar" type="button" class="btn-secondary">Guardar</button>
+        </div>
+
+        <div id="resultado" class="result"></div>
+        <div id="equivalencias" class="result"></div>
+        <div id="tinacos" class="result"></div>
+
+        <div class="chart-container">
+          <canvas id="calcChart"></canvas>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer><p>© 2025 Agua Pluvial Zinacantepec</p></footer>
+
+  <div id="app-modal" class="modal"></div>
+  <div id="app-toast" class="toast"></div>
+  <div id="app-loader" class="loader"><div class="spinner"></div></div>
+
+  <!-- Primero JavaScript del sitio -->
+  <script src="java.js" defer></script>
+  <!-- Luego carga Chart.js para asegurar disponibilidad -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

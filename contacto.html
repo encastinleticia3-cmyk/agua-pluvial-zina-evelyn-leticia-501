@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Contacto - Agua Pluvial Zinacantepec</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <img src="gota.jpg" alt="logo" class="brand-logo">
+      <h1 class="brand-title">Agua Pluvial Zinacantepec</h1>
+    </div>
+
+    <nav class="nav" id="main-nav">
+      <a href="index.html">Inicio</a>
+      <a href="problema.html">El Problema</a>
+      <a href="soluciones.html">Soluciones</a>
+      <a href="calculadora.html">Calculadora</a>
+      <a href="galeria.html">Galería</a>
+      <a href="contacto.html" class="active">Contacto</a>
+      <a href="mapa.html">Ver mapa</a>
+    </nav>
+
+    <button class="hamburger" id="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+  </header>
+
+  <main>
+    <section class="section">
+      <h3>Contacto</h3>
+      <form id="form-contacto" class="form" novalidate>
+        <input id="nombre" class="input" type="text" placeholder="Tu nombre" required>
+        <input id="correo" class="input" type="email" placeholder="tuemail@dominio.com" required>
+        <textarea id="mensaje" class="input" placeholder="Tu mensaje..." required></textarea>
+
+        <h4>Encuesta rápida</h4>
+        <div class="checkbox-grid">
+          <label><input type="checkbox" name="encuesta" value="usabilidad"> Fácil de usar</label>
+          <label><input type="checkbox" name="encuesta" value="claridad"> Información clara</label>
+          <label><input type="checkbox" name="encuesta" value="diseño"> Diseño agradable</label>
+          <label><input type="checkbox" name="encuesta" value="velocidad"> carga rapido</label>
+          <label><input type="checkbox" name="encuesta" value="movil"> funciona en mi movil</label>
+          <label><input type="checkbox" name="encuesta" value="contacto"> facil contactar al equipo</label>
+          <label><input type="checkbox" name="encuesta" value="calculadora"> la calculadora es util</label>
+        </div><label><input type="checkbox" name="encuesta" value="utilidad"> la pagina es util</label>
+
+        <div class="form-buttons">
+          <button type="submit" class="btn-primary">Enviar</button>
+          <button id="btnGuardarContacto" type="button" class="btn-secondary">Guardar local</button>
+        </div>
+
+        <div id="contacto-result" class="form-result"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer><p>© 2025 Agua Pluvial Zinacantepec</p></footer>
+
+  <script src="java.js" defer></script>
+</body>
+</html>

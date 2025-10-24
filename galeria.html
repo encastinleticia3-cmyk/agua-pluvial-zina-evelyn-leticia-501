@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Galería - Agua Pluvial Zinacantepec</title>
+  <meta name="description" content="Galería de proyectos de captación exitosos">
+  <link rel="icon" href="favicon.ico">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%2300bcd4'/><stop offset='1' stop-color='%2300769a'/></linearGradient></defs><path fill='url(%23g)' d='M32 2C20 18 8 28 8 40a24 24 0 0 0 48 0C56 28 44 18 32 2z'/><circle cx='32' cy='44' r='8' fill='%23e1f5fe'/></svg>" alt="logo" class="brand-logo">
+      <h1 class="brand-title">Agua Pluvial Zinacantepec</h1>
+    </div>
+
+    <nav class="nav" id="main-nav">
+      <a href="index.html" class="nav-link">Inicio</a>
+      <a href="problema.html" class="nav-link">El Problema</a>
+      <a href="soluciones.html" class="nav-link">Soluciones</a>
+      <a href="calculadora.html" class="nav-link">Calculadora</a>
+      <a href="galeria.html" class="nav-link active">Galería</a>
+      <a href="contacto.html" class="nav-link">Contacto</a>
+      <a href="mapa.html" class="nav-link">Ver mapa</a>
+    </nav>
+
+    <button class="hamburger" aria-label="Abrir menú" id="hamburger" aria-expanded="false">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="section">
+      <h3>Galería de Proyectos Exitosos</h3>
+      <div class="gallery-grid" id="gallery">
+        <img loading="lazy" src="jardinagua.jpg" alt="Proyecto 1" data-title="Proyecto 1"> 
+        <img loading="lazy" src="tejado.jpg" alt="Proyecto 2" data-title="Proyecto 2">
+        <img loading="lazy" src="pluvial.jpg" alt="Proyecto 3" data-title="Proyecto 3">
+        <img loading="lazy" src="techos.jpg" alt="Proyecto 4" data-title="Proyecto 4">
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Agua Pluvial Zinacantepec</p>
+  </footer>
+
+  <div id="app-modal" class="modal" aria-hidden="true"></div>
+  <div id="app-toast" class="toast" aria-live="polite"></div>
+  <div id="app-loader" class="loader" aria-hidden="true"><div class="spinner"></div></div>
+
+  <script src="java.js" defer></script>
+</body>
+</html>
